@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package exchange;
+
+// Telephone exchange service - simulates the complex process of
+// establishing a phone call through a central office switch.
+service TelephoneExchange {
+  // Server-streaming RPC: client initiates a dial, server streams progress.
+  // Client can cancel at any time by dropping the stream.
+  rpc Dial(DialRequest) returns (stream DialProgress);
+}
+
+// Request to dial a number through the exchange.
+message DialRequest {
+  string caller = 1;         // caller number, e.g. "010-1234"
+  string callee = 2;         // target number, e.g. "021-5678"
+  int32 timeout_seconds = 3; // max ring wait time (default 30s)
+}
+
+// Stages of the dialing process.
+enum DialStage {
+  DIAL_STAGE_UNSPECIFIED = 0;
+  VALIDATING = 1;   // validating phone numbers
+  ROUTING = 2;      // finding route through exchange
+  RINGING = 3;      // ringing the destination
+  CONNECTED = 4;    // call established
+  FAILED = 5;       // call failed (busy, no answer, invalid number)
+  COMPLETED = 6;    // call ended normally
+}
+
+// A single progress update streamed from server to client.
+message DialProgress {
+  string call_id = 1;           // unique call identifier
+  DialStage stage = 2;          // current dialing stage
+  int32 progress_percent = 3;   // 0-100 overall progress
+  string message = 4;           // human-readable status
+  int64 timestamp_ms = 5;       // epoch milliseconds
+  string callee_number = 6;     // echoed back for correlation
+}

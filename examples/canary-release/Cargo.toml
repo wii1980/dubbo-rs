@@ -1,0 +1,16 @@
+[package]
+name = "canary-release"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+dubbo-rs = { path = "../../dubbo" }
+async-trait = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+
+[package.metadata.release]
+release = false

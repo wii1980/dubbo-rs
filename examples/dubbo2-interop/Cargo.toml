@@ -1,0 +1,15 @@
+[package]
+name = "dubbo2-interop"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+dubbo-rs = { path = "../../dubbo", features = ["dubbo2"] }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+
+[package.metadata.release]
+release = false
