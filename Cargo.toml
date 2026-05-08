@@ -174,39 +174,39 @@ proc-macro2 = "1"
 etcd-client = "0.18"
 
 # Internal crates
-dubbo-rs-common = { path = "dubbo-common" }
-dubbo-rs-macros = { path = "dubbo-macros" }
-dubbo-rs-protocol = { path = "dubbo-protocol" }
-dubbo-rs-serialization = { path = "dubbo-serialization" }
-dubbo-rs-serialization-protobuf = { path = "dubbo-serialization-protobuf" }
-dubbo-rs-serialization-hessian2 = { path = "dubbo-serialization-hessian2" }
-dubbo-rs-serialization-json = { path = "dubbo-serialization-json" }
-dubbo-rs-remoting = { path = "dubbo-remoting" }
-dubbo-rs-protocol-triple = { path = "dubbo-protocol-triple" }
-dubbo-rs-protocol-dubbo = { path = "dubbo-protocol-dubbo" }
-dubbo-rs-registry = { path = "dubbo-registry" }
-dubbo-rs-registry-zookeeper = { path = "dubbo-registry-zookeeper" }
-dubbo-rs-registry-nacos = { path = "dubbo-registry-nacos" }
-dubbo-rs-registry-etcd = { path = "dubbo-registry-etcd" }
-dubbo-rs-registry-redis = { path = "dubbo-registry-redis" }
-dubbo-rs-cluster = { path = "dubbo-cluster" }
-dubbo-rs-loadbalance = { path = "dubbo-loadbalance" }
-dubbo-rs-filter = { path = "dubbo-filter" }
-dubbo-rs-proxy = { path = "dubbo-proxy" }
-dubbo-rs-client = { path = "dubbo-client" }
-dubbo-rs-server = { path = "dubbo-server" }
-dubbo-rs = { path = "dubbo" }
-dubbo-rs-config = { path = "dubbo-config" }
-dubbo-rs-logger = { path = "dubbo-logger" }
-dubbo-rs-metrics = { path = "dubbo-metrics" }
-dubbo-rs-tracing = { path = "dubbo-tracing" }
-dubbo-rs-configcenter = { path = "dubbo-configcenter" }
-dubbo-rs-configcenter-zookeeper = { path = "dubbo-configcenter-zookeeper" }
-dubbo-rs-configcenter-nacos = { path = "dubbo-configcenter-nacos" }
-dubbo-rs-configcenter-apollo = { path = "dubbo-configcenter-apollo" }
-dubbo-rs-protocol-grpc = { path = "dubbo-protocol-grpc" }
-dubbo-rs-protocol-jsonrpc = { path = "dubbo-protocol-jsonrpc" }
-dubbo-rs-protocol-rest = { path = "dubbo-protocol-rest" }
-dubbo-rs-codegen = { path = "dubbo-codegen" }
-dubbo-rs-tls = { path = "dubbo-tls" }
-dubbo-rs-metadata = { path = "dubbo-metadata" }
+dubbo-rs-common = { version = "0.1.2", path = "dubbo-common" }
+dubbo-rs-macros = { version = "0.1.1", path = "dubbo-macros" }
+dubbo-rs-protocol = { version = "0.1.0", path = "dubbo-protocol" }
+dubbo-rs-serialization = { version = "0.1.0", path = "dubbo-serialization" }
+dubbo-rs-serialization-protobuf = { version = "0.1.0", path = "dubbo-serialization-protobuf" }
+dubbo-rs-serialization-hessian2 = { version = "0.1.0", path = "dubbo-serialization-hessian2" }
+dubbo-rs-serialization-json = { version = "0.1.0", path = "dubbo-serialization-json" }
+dubbo-rs-remoting = { version = "0.1.0", path = "dubbo-remoting" }
+dubbo-rs-protocol-triple = { version = "0.1.0", path = "dubbo-protocol-triple" }
+dubbo-rs-protocol-dubbo = { version = "0.1.0", path = "dubbo-protocol-dubbo" }
+dubbo-rs-registry = { version = "0.1.0", path = "dubbo-registry" }
+dubbo-rs-registry-zookeeper = { version = "0.1.0", path = "dubbo-registry-zookeeper" }
+dubbo-rs-registry-nacos = { version = "0.1.0", path = "dubbo-registry-nacos" }
+dubbo-rs-registry-etcd = { version = "0.1.0", path = "dubbo-registry-etcd" }
+dubbo-rs-registry-redis = { version = "0.1.0", path = "dubbo-registry-redis" }
+dubbo-rs-cluster = { version = "0.1.0", path = "dubbo-cluster" }
+dubbo-rs-loadbalance = { version = "0.1.0", path = "dubbo-loadbalance" }
+dubbo-rs-filter = { version = "0.1.0", path = "dubbo-filter" }
+dubbo-rs-proxy = { version = "0.1.0", path = "dubbo-proxy" }
+dubbo-rs-client = { version = "0.1.0", path = "dubbo-client" }
+dubbo-rs-server = { version = "0.1.0", path = "dubbo-server" }
+dubbo-rs = { version = "0.1.0", path = "dubbo" }
+dubbo-rs-config = { version = "0.1.0", path = "dubbo-config" }
+dubbo-rs-logger = { version = "0.1.0", path = "dubbo-logger" }
+dubbo-rs-metrics = { version = "0.1.0", path = "dubbo-metrics" }
+dubbo-rs-tracing = { version = "0.1.0", path = "dubbo-tracing" }
+dubbo-rs-configcenter = { version = "0.1.0", path = "dubbo-configcenter" }
+dubbo-rs-configcenter-zookeeper = { version = "0.1.0", path = "dubbo-configcenter-zookeeper" }
+dubbo-rs-configcenter-nacos = { version = "0.1.0", path = "dubbo-configcenter-nacos" }
+dubbo-rs-configcenter-apollo = { version = "0.1.0", path = "dubbo-configcenter-apollo" }
+dubbo-rs-protocol-grpc = { version = "0.1.0", path = "dubbo-protocol-grpc" }
+dubbo-rs-protocol-jsonrpc = { version = "0.1.0", path = "dubbo-protocol-jsonrpc" }
+dubbo-rs-protocol-rest = { version = "0.1.0", path = "dubbo-protocol-rest" }
+dubbo-rs-codegen = { version = "0.1.0", path = "dubbo-codegen" }
+dubbo-rs-tls = { version = "0.1.0", path = "dubbo-tls" }
+dubbo-rs-metadata = { version = "0.1.0", path = "dubbo-metadata" }

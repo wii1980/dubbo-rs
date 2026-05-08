@@ -741,7 +741,7 @@ dependencies = [
 
 [[package]]
 name = "dubbo-rs-common"
-version = "0.1.0"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -863,7 +863,7 @@ dependencies = [
 
 [[package]]
 name = "dubbo-rs-macros"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-trait",
