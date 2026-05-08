@@ -1,0 +1,33 @@
+[package]
+name = "dubbo-rs-metrics"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Prometheus-based RPC metrics collection and export for Apache Dubbo Rust"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-filter = { workspace = true }
+async-trait = { workspace = true }
+anyhow = { workspace = true }
+prometheus = { workspace = true }
+tracing = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_yaml = { workspace = true }
+serde_json = { workspace = true }
+hyper = { workspace = true, features = ["server", "http1"] }
+hyper-util = { version = "0.1", features = ["tokio"] }
+http = { workspace = true }
+http-body-util = "0.1"
+dashmap = { workspace = true }
+
+[lints]
+workspace = true

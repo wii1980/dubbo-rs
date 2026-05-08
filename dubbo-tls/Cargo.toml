@@ -1,0 +1,26 @@
+[package]
+name = "dubbo-rs-tls"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "TLS/mTLS support for Apache Dubbo Rust via rustls"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std"] }
+rustls-pemfile = "2"
+tokio-rustls = "0.26"
+webpki-roots = "0.26"
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints]
+workspace = true

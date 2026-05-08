@@ -1,0 +1,25 @@
+[package]
+name = "dubbo-rs-logger"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Logging abstraction for Apache Dubbo Rust based on tracing-subscriber"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-config = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true, features = ["env-filter", "json"] }
+
+[dev-dependencies]
+serde_yaml = { workspace = true }
+
+[lints]
+workspace = true
