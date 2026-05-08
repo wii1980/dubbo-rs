@@ -1,0 +1,23 @@
+[package]
+name = "dubbo-rs-loadbalance"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Load balancing strategies for Apache Dubbo Rust — random, round-robin, least-active, consistent-hash"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+rand = { workspace = true }
+async-trait = { workspace = true }
+anyhow = { workspace = true }
+dashmap = { workspace = true }
+
+[lints]
+workspace = true

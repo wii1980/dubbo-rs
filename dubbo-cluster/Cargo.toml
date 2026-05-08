@@ -1,0 +1,26 @@
+[package]
+name = "dubbo-rs-cluster"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Cluster fault-tolerance strategies and service directory for Apache Dubbo Rust"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-registry = { workspace = true }
+async-trait = { workspace = true }
+anyhow = { workspace = true }
+dashmap = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+rhai = "1"
+
+[lints]
+workspace = true
