@@ -1,0 +1,29 @@
+[package]
+name = "dubbo-rs-server"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "High-level server API for hosting Dubbo RPC services"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-proxy = { workspace = true }
+dubbo-rs-config = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-protocol-triple = { workspace = true }
+dubbo-rs-filter = { workspace = true }
+dubbo-rs-registry = { workspace = true }
+async-trait = { workspace = true }
+tracing = { workspace = true }
+tonic = { workspace = true }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+
+[lints]
+workspace = true
