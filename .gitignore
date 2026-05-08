@@ -1,0 +1,27 @@
+# Rust build artifacts
+/target/
+
+# Java build artifacts
+**/target/
+**/*.rs.bk
+*.pdb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reference projects (not part of this repo)
+/dubbo-java
+/dubbo-go
+
+.sisyphus/
+/docs
+/scripts
+/tests
+release.toml

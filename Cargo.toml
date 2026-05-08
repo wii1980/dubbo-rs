@@ -1,0 +1,212 @@
+[workspace]
+resolver = "2"
+members = [
+    # === P0: 核心基础 ===
+    "dubbo-common",
+    "dubbo-macros",
+
+    # === P0: 协议核心 ===
+    "dubbo-protocol",
+    "dubbo-serialization",
+    "dubbo-serialization-protobuf",
+
+    # === P0: 网络传输 ===
+    "dubbo-remoting",
+
+    # === P0: 协议实现 ===
+    "dubbo-protocol-triple",
+
+    # === P0: 注册中心 ===
+    "dubbo-registry",
+    "dubbo-registry-zookeeper",
+    "dubbo-registry-nacos",
+    "dubbo-registry-etcd",
+    "dubbo-registry-redis",
+
+    # === P0: 集群与负载均衡 ===
+    "dubbo-cluster",
+    "dubbo-loadbalance",
+
+    # === P0: 过滤器 ===
+    "dubbo-filter",
+
+    # === P0: 高层 API ===
+    "dubbo-proxy",
+    "dubbo-client",
+    "dubbo-server",
+    "dubbo",
+
+    # === P1: 序列化扩展 ===
+    "dubbo-serialization-hessian2",
+    "dubbo-serialization-json",
+
+    # === P1: 协议扩展 ===
+    "dubbo-protocol-dubbo",
+
+    # === P1/P2: 配置与日志 ===
+    "dubbo-config",
+    "dubbo-logger",
+
+    # === P1: 可观测性 ===
+    "dubbo-metrics",
+    "dubbo-tracing",
+
+    # === P2: 配置中心 ===
+    "dubbo-configcenter",
+    "dubbo-configcenter-zookeeper",
+    "dubbo-configcenter-nacos",
+    "dubbo-configcenter-apollo",
+
+    # === P2: 协议扩展 ===
+    "dubbo-protocol-grpc",
+    "dubbo-protocol-jsonrpc",
+    "dubbo-protocol-rest",
+
+    # === P2: 工具 ===
+    "dubbo-codegen",
+
+    # === P2: TLS ===
+    "dubbo-tls",
+
+    # === P2: 元数据 ===
+    "dubbo-metadata",
+
+    # === 示例 ===
+    "examples/hello-world",
+    "examples/instance-demo",
+    "examples/filter-chain",
+    "examples/dubbo2-interop",
+    "examples/zk-discovery",
+    "examples/nacos-discovery",
+    "examples/failover",
+    "examples/canary-release",
+    "examples/phone-dialing",
+    "examples/codegen-demo",
+
+    # === 性能基准测试 ===
+    "tests/perf",
+
+    # === 跨语言测试 ===
+    "cross-lang-tests",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.87"
+repository = "https://github.com/wii1980/dubbo-rs"
+homepage = "https://github.com/wii1980/dubbo-rs"
+documentation = "https://docs.rs/dubbo-rs"
+keywords = ["dubbo", "rpc", "microservice"]
+categories = ["network-programming", "asynchronous", "web-programming"]
+readme = "README.md"
+
+[workspace.lints.rust]
+unsafe_code = "warn"
+
+[workspace.lints.clippy]
+all = "warn"
+pedantic = "warn"
+
+[workspace.dependencies]
+# async runtime
+tokio = { version = "1", features = ["full"] }
+async-trait = "0.1"
+
+# serialization
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+prost = "0.14"
+prost-build = "0.14"
+
+# HTTP / gRPC
+tonic = { version = "0.14", features = ["transport", "codegen"] }
+tonic-prost = "0.14"
+tonic-build = "0.14"
+tonic-prost-build = "0.14"
+hyper = "1"
+http = "1"
+reqwest = { version = "0.12", features = ["json"] }
+bytes = "1"
+tower = { version = "0.5", features = ["util"] }
+tokio-stream = "0.1"
+
+# registry
+zookeeper = "0.8"
+
+# concurrency
+dashmap = "6"
+once_cell = "1"
+
+# SPI / extension
+inventory = "0.3"
+
+# random
+rand = "0.8"
+byteorder = "1"
+base64 = "0.22"
+
+# logging / observability
+tracing = "0.1"
+tracing-subscriber = "0.3"
+opentelemetry = { version = "0.28", features = ["trace"] }
+opentelemetry_sdk = { version = "0.28", features = ["rt-tokio", "trace"] }
+opentelemetry-otlp = { version = "0.28", features = ["trace", "tonic"] }
+prometheus = "0.14"
+
+# error handling
+thiserror = "2"
+anyhow = "1"
+
+# crypto
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+
+# proc-macro
+syn = { version = "2", features = ["full"] }
+quote = "1"
+proc-macro2 = "1"
+
+# etcd
+etcd-client = "0.18"
+
+# Internal crates
+dubbo-rs-common = { path = "dubbo-common" }
+dubbo-rs-macros = { path = "dubbo-macros" }
+dubbo-rs-protocol = { path = "dubbo-protocol" }
+dubbo-rs-serialization = { path = "dubbo-serialization" }
+dubbo-rs-serialization-protobuf = { path = "dubbo-serialization-protobuf" }
+dubbo-rs-serialization-hessian2 = { path = "dubbo-serialization-hessian2" }
+dubbo-rs-serialization-json = { path = "dubbo-serialization-json" }
+dubbo-rs-remoting = { path = "dubbo-remoting" }
+dubbo-rs-protocol-triple = { path = "dubbo-protocol-triple" }
+dubbo-rs-protocol-dubbo = { path = "dubbo-protocol-dubbo" }
+dubbo-rs-registry = { path = "dubbo-registry" }
+dubbo-rs-registry-zookeeper = { path = "dubbo-registry-zookeeper" }
+dubbo-rs-registry-nacos = { path = "dubbo-registry-nacos" }
+dubbo-rs-registry-etcd = { path = "dubbo-registry-etcd" }
+dubbo-rs-registry-redis = { path = "dubbo-registry-redis" }
+dubbo-rs-cluster = { path = "dubbo-cluster" }
+dubbo-rs-loadbalance = { path = "dubbo-loadbalance" }
+dubbo-rs-filter = { path = "dubbo-filter" }
+dubbo-rs-proxy = { path = "dubbo-proxy" }
+dubbo-rs-client = { path = "dubbo-client" }
+dubbo-rs-server = { path = "dubbo-server" }
+dubbo-rs = { path = "dubbo" }
+dubbo-rs-config = { path = "dubbo-config" }
+dubbo-rs-logger = { path = "dubbo-logger" }
+dubbo-rs-metrics = { path = "dubbo-metrics" }
+dubbo-rs-tracing = { path = "dubbo-tracing" }
+dubbo-rs-configcenter = { path = "dubbo-configcenter" }
+dubbo-rs-configcenter-zookeeper = { path = "dubbo-configcenter-zookeeper" }
+dubbo-rs-configcenter-nacos = { path = "dubbo-configcenter-nacos" }
+dubbo-rs-configcenter-apollo = { path = "dubbo-configcenter-apollo" }
+dubbo-rs-protocol-grpc = { path = "dubbo-protocol-grpc" }
+dubbo-rs-protocol-jsonrpc = { path = "dubbo-protocol-jsonrpc" }
+dubbo-rs-protocol-rest = { path = "dubbo-protocol-rest" }
+dubbo-rs-codegen = { path = "dubbo-codegen" }
+dubbo-rs-tls = { path = "dubbo-tls" }
+dubbo-rs-metadata = { path = "dubbo-metadata" }

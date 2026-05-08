@@ -1,0 +1,26 @@
+[package]
+name = "dubbo-rs-common"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Core foundation for Apache Dubbo Rust — URL, Node trait, constants, SPI extension registry, RPC error types"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+tokio = { workspace = true }
+async-trait = { workspace = true }
+serde = { workspace = true }
+serde_yaml = { workspace = true }
+dashmap = { workspace = true }
+once_cell = { workspace = true }
+inventory = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+
+[lints]
+workspace = true
