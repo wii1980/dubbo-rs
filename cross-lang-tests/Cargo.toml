@@ -1,0 +1,65 @@
+[package]
+name = "cross-lang-tests"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+dubbo-rs.workspace = true
+dubbo-rs-client.workspace = true
+dubbo-rs-common.workspace = true
+dubbo-rs-config.workspace = true
+dubbo-rs-filter.workspace = true
+dubbo-rs-loadbalance.workspace = true
+dubbo-rs-logger.workspace = true
+dubbo-rs-metadata.workspace = true
+dubbo-rs-metrics.workspace = true
+dubbo-rs-protocol.workspace = true
+dubbo-rs-protocol-dubbo.workspace = true
+dubbo-rs-protocol-triple.workspace = true
+dubbo-rs-registry.workspace = true
+dubbo-rs-remoting.workspace = true
+dubbo-rs-server.workspace = true
+dubbo-rs-serialization.workspace = true
+dubbo-rs-serialization-hessian2.workspace = true
+dubbo-rs-cluster.workspace = true
+dubbo-rs-protocol-jsonrpc.workspace = true
+dubbo-rs-protocol-rest.workspace = true
+dubbo-rs-serialization-json.workspace = true
+dubbo-rs-serialization-protobuf.workspace = true
+dubbo-rs-tls.workspace = true
+dubbo-rs-tracing.workspace = true
+dubbo-rs-registry-etcd.workspace = true
+dubbo-rs-registry-redis.workspace = true
+dubbo-rs-registry-nacos.workspace = true
+dubbo-rs-registry-zookeeper.workspace = true
+dubbo-rs-configcenter.workspace = true
+dubbo-rs-configcenter-zookeeper.workspace = true
+dubbo-rs-configcenter-nacos.workspace = true
+tokio.workspace = true
+tonic.workspace = true
+tonic-prost.workspace = true
+prost.workspace = true
+tower.workspace = true
+tracing.workspace = true
+tokio-stream.workspace = true
+bytes.workspace = true
+http.workspace = true
+async-trait.workspace = true
+anyhow.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+reqwest.workspace = true
+
+rustls = { version = "0.23", default-features = false, features = ["ring", "std"] }
+http-body-util = "0.1"
+
+[build-dependencies]
+tonic-prost-build.workspace = true
+
+[package.metadata.release]
+release = false
