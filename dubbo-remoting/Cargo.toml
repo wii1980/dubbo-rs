@@ -1,0 +1,23 @@
+[package]
+name = "dubbo-rs-remoting"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Network transport abstraction for Apache Dubbo Rust — ExchangeClient, ExchangeServer, Codec, ConnectionPool"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-tls = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+bytes = { workspace = true }
+anyhow = { workspace = true }
+
+[lints]
+workspace = true
