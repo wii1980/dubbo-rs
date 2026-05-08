@@ -1,0 +1,111 @@
+[package]
+name = "dubbo-rs"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Apache Dubbo Rust — unified Instance entry point combining Server and Client"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[features]
+# ======== 默认特性（按角色选择） ========
+default = ["server", "client"]
+
+# ======== 核心特性 ========
+server = ["dep:dubbo-rs-server"]           # 服务端能力
+client = ["dep:dubbo-rs-client"]           # 客户端能力
+nacos     = ["dep:dubbo-rs-registry-nacos"]
+zookeeper = ["dep:dubbo-rs-registry-zookeeper"]
+etcd      = ["dep:dubbo-rs-registry-etcd"]
+redis     = ["dep:dubbo-rs-registry-redis"]
+
+# ======== 扩展协议（不同端口上提供服务） ========
+dubbo2  = ["dep:dubbo-rs-protocol-dubbo"]
+grpc    = ["dep:dubbo-rs-protocol-grpc"]
+jsonrpc = ["dep:dubbo-rs-protocol-jsonrpc"]
+rest    = ["dep:dubbo-rs-protocol-rest"]
+
+# ======== 配置中心（互斥，一个应用只能选一个） ========
+configcenter-zookeeper = ["dep:dubbo-rs-configcenter", "dep:dubbo-rs-configcenter-zookeeper"]
+configcenter-nacos     = ["dep:dubbo-rs-configcenter", "dep:dubbo-rs-configcenter-nacos"]
+configcenter-apollo    = ["dep:dubbo-rs-configcenter", "dep:dubbo-rs-configcenter-apollo"]
+
+# ======== 可观测性 ========
+metrics = ["dep:dubbo-rs-metrics"]
+tracing = ["dep:dubbo-rs-tracing"]
+
+# ======== 序列化（通常由协议自动决定，也可显式选择） ========
+serialization-hessian2 = ["dep:dubbo-rs-serialization-hessian2"]
+serialization-json     = ["dep:dubbo-rs-serialization-json"]
+
+# ======== 其他 ========
+tls      = ["dep:dubbo-rs-tls"]
+metadata = ["dep:dubbo-rs-metadata"]
+
+[dependencies]
+# === 核心抽象层（始终编译） ===
+dubbo-rs-common = { workspace = true }
+dubbo-rs-macros = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-serialization = { workspace = true }
+dubbo-rs-remoting = { workspace = true }
+dubbo-rs-registry = { workspace = true }
+dubbo-rs-cluster = { workspace = true }
+dubbo-rs-loadbalance = { workspace = true }
+dubbo-rs-filter = { workspace = true }
+dubbo-rs-proxy = { workspace = true }
+dubbo-rs-config = { workspace = true }
+dubbo-rs-logger = { workspace = true }
+
+# === Triple 协议 + Protobuf 序列化（始终编译，server/client 基础依赖） ===
+dubbo-rs-protocol-triple = { workspace = true }
+dubbo-rs-serialization-protobuf = { workspace = true }
+
+# === 可选角色（通过 server/client feature 控制） ===
+dubbo-rs-client = { workspace = true, optional = true }
+dubbo-rs-server = { workspace = true, optional = true }
+
+# === 协议实现（可选） ===
+dubbo-rs-protocol-dubbo = { workspace = true, optional = true }
+dubbo-rs-protocol-grpc = { workspace = true, optional = true }
+dubbo-rs-protocol-jsonrpc = { workspace = true, optional = true }
+dubbo-rs-protocol-rest = { workspace = true, optional = true }
+
+# === 注册中心实现（可选） ===
+dubbo-rs-registry-zookeeper = { workspace = true, optional = true }
+dubbo-rs-registry-nacos = { workspace = true, optional = true }
+dubbo-rs-registry-etcd = { workspace = true, optional = true }
+dubbo-rs-registry-redis = { workspace = true, optional = true }
+
+# === 配置中心抽象与实现（可选，互斥） ===
+dubbo-rs-configcenter = { workspace = true, optional = true }
+dubbo-rs-configcenter-zookeeper = { workspace = true, optional = true }
+dubbo-rs-configcenter-nacos = { workspace = true, optional = true }
+dubbo-rs-configcenter-apollo = { workspace = true, optional = true }
+
+# === 序列化实现（可选） ===
+dubbo-rs-serialization-hessian2 = { workspace = true, optional = true }
+dubbo-rs-serialization-json = { workspace = true, optional = true }
+
+# === 可观测性（可选） ===
+dubbo-rs-metrics = { workspace = true, optional = true }
+dubbo-rs-tracing = { workspace = true, optional = true }
+
+# === 其他可选 ===
+dubbo-rs-tls = { workspace = true, optional = true }
+dubbo-rs-metadata = { workspace = true, optional = true }
+
+# === 外部依赖 ===
+tokio = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+
+[dev-dependencies]
+async-trait = { workspace = true }
+
+[lints]
+workspace = true
