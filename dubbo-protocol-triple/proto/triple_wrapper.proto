@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package dubbo.triple;
+
+// Triple Request Wrapper — wraps a single Unary request
+message TripleRequestWrapper {
+  // Serialization type identifier (e.g., "protobuf", "json", "hessian2")
+  string serialize_type = 1;
+
+  // Raw request bytes (protobuf-encoded message per argument)
+  repeated bytes args = 2;
+
+  // Method parameter types (Java-style descriptors, e.g., "Ljava/lang/String;")
+  repeated string arg_types = 3;
+}
+
+// Triple Response Wrapper — wraps a single Unary response
+message TripleResponseWrapper {
+  // Serialization type identifier
+  string serialize_type = 1;
+
+  // Raw response bytes (protobuf-encoded message)
+  bytes data = 2;
+
+  // Response type descriptor
+  string type = 3;
+}

@@ -1,0 +1,36 @@
+[package]
+name = "dubbo-rs-protocol-triple"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Triple protocol (HTTP/2 gRPC-compatible) for Apache Dubbo Rust"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-remoting = { workspace = true }
+tonic = { workspace = true }
+tonic-prost = { workspace = true }
+hyper = { workspace = true }
+http = { workspace = true }
+prost = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+anyhow = { workspace = true }
+bytes = { workspace = true }
+tokio-stream = { workspace = true }
+
+[build-dependencies]
+tonic-prost-build = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
+
+[lints]
+workspace = true

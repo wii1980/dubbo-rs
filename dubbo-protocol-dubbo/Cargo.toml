@@ -1,0 +1,28 @@
+[package]
+name = "dubbo-rs-protocol-dubbo"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Dubbo TCP binary protocol (Dubbo2 compatible) with Hessian2 body serialization"
+repository.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+categories.workspace = true
+readme = "README.md"
+
+[dependencies]
+dubbo-rs-common = { workspace = true }
+dubbo-rs-protocol = { workspace = true }
+dubbo-rs-remoting = { workspace = true }
+dubbo-rs-serialization = { workspace = true }
+dubbo-rs-serialization-hessian2 = { workspace = true }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+bytes = { workspace = true }
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+byteorder = { workspace = true }
+
+[dev-dependencies]
+tokio = { workspace = true }
