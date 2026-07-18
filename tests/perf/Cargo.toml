@@ -1,0 +1,44 @@
+[package]
+name = "tests-perf"
+version.workspace = true
+edition.workspace = true
+publish = false
+license.workspace = true
+rust-version.workspace = true
+description = "Performance benchmarks and concurrent stress tests for Apache Dubbo Rust"
+
+[dependencies]
+dubbo-rs = { workspace = true, features = ["dubbo2", "serialization-hessian2", "serialization-json"] }
+tokio = { workspace = true }
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+bytes = { workspace = true }
+rand = { workspace = true }
+prost = { workspace = true }
+
+[build-dependencies]
+prost-build = { workspace = true }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+tonic = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[[bench]]
+name = "hessian2"
+harness = false
+
+[[bench]]
+name = "loadbalance"
+harness = false
+
+[[bench]]
+name = "serialization"
+harness = false
+
+[lints]
+workspace = true
+
+[package.metadata.release]
+release = false

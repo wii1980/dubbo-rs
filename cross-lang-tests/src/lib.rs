@@ -104,6 +104,11 @@ impl PortAllocator {
     /// eliminating TOCTOU races. Callers should drop the listener immediately
     /// before binding their own server to the same port.
     ///
+    /// Under parallel test execution the moment between `drop(listener)` and
+    /// the caller's `bind(port)` is still a tiny window where another test
+    /// thread may grab the same port from the OS. Callers that observe
+    /// `AddrInUse` should retry by re-allocating a fresh port.
+    ///
     /// # Panics
     /// Panics if unable to bind to an ephemeral port.
     #[must_use]

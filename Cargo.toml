@@ -194,7 +194,7 @@ dubbo-rs-loadbalance = { version = "0.1.0", path = "dubbo-loadbalance" }
 dubbo-rs-filter = { version = "0.1.0", path = "dubbo-filter" }
 dubbo-rs-proxy = { version = "0.1.0", path = "dubbo-proxy" }
 dubbo-rs-client = { version = "0.1.0", path = "dubbo-client" }
-dubbo-rs-server = { version = "0.1.0", path = "dubbo-server" }
+dubbo-rs-server = { version = "0.1.1", path = "dubbo-server" }
 dubbo-rs = { version = "0.1.0", path = "dubbo" }
 dubbo-rs-config = { version = "0.1.0", path = "dubbo-config" }
 dubbo-rs-logger = { version = "0.1.0", path = "dubbo-logger" }

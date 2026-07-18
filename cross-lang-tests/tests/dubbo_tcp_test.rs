@@ -663,6 +663,44 @@ mod b_r_roundtrip {
         cross_lang_tests::PortAllocator::allocate()
     }
 
+    /// Bind an RS `DubboServer` to a freshly-allocated port, retrying on
+    /// `AddrInUse` to tolerate the TOCTOU race between dropping the
+    /// `allocate_held` listener and the server's own bind under parallel
+    /// test execution.
+    async fn bind_rs_server_with_retry(
+        serial: dubbo_rs_protocol_dubbo::codec::SerializationId,
+    ) -> (dubbo_rs_protocol_dubbo::transport::DubboServer, u16) {
+        const MAX_RETRIES: usize = 10;
+        for attempt in 0..MAX_RETRIES {
+            let (held, port) = cross_lang_tests::PortAllocator::allocate_held();
+            let mut url = dubbo_rs_common::url::URL::new("dubbo", "/com.example.Greeter");
+            url.ip = "127.0.0.1".into();
+            url.port = port.to_string();
+            let invoker = std::sync::Arc::new(MockInvoker::new(url.clone()));
+            let server = dubbo_rs_protocol_dubbo::transport::DubboServer::new(serial)
+                .with_invoker(invoker);
+            drop(held);
+            match server.bind(&url).await {
+                Ok(()) => {
+                    tokio::time::sleep(Duration::from_millis(50)).await;
+                    return (server, port);
+                }
+                Err(e) => {
+                    server.close().await;
+                    assert!(
+                        attempt + 1 < MAX_RETRIES,
+                        "RS server bind failed after {MAX_RETRIES} retries: {e}"
+                    );
+                    eprintln!(
+                        "[bind retry {}/{MAX_RETRIES}] port {port}: {e}; retrying",
+                        attempt + 1
+                    );
+                }
+            }
+        }
+        unreachable!("bind_rs_server_with_retry exits only via return or panic")
+    }
+
     /// B-R-001: RS DubboClient → Java DubboTcpTestServer (sayHello)
     ///
     /// This is the most critical end-to-end cross-language test:
@@ -863,20 +901,10 @@ mod b_r_roundtrip {
     /// to it, sends a sayHello request, and verifies the response.
     #[tokio::test]
     async fn br_004_rs_client_to_rs_server_sayhello() {
-        let (held_port, port) = cross_lang_tests::PortAllocator::allocate_held();
-
-        let mut server_url = dubbo_rs_common::url::URL::new("dubbo", "/com.example.Greeter");
-        server_url.ip = "127.0.0.1".into();
-        server_url.port = port.to_string();
-
-        let invoker = std::sync::Arc::new(MockInvoker::new(server_url.clone()));
-        let server = dubbo_rs_protocol_dubbo::transport::DubboServer::new(
+        let (server, port) = bind_rs_server_with_retry(
             dubbo_rs_protocol_dubbo::codec::SerializationId::Hessian2,
         )
-        .with_invoker(invoker);
-        drop(held_port);
-        server.bind(&server_url).await.expect("server bind");
-        tokio::time::sleep(Duration::from_millis(50)).await;
+        .await;
 
         // Connect client
         let mut client_url = dubbo_rs_common::url::URL::new("dubbo", "/com.example.Greeter");
@@ -932,20 +960,10 @@ mod b_r_roundtrip {
     /// Sends 5 consecutive requests to the RS DubboServer and verifies all succeed.
     #[tokio::test]
     async fn br_005_rs_client_to_rs_server_multiple_calls() {
-        let (held_port, port) = cross_lang_tests::PortAllocator::allocate_held();
-
-        let mut server_url = dubbo_rs_common::url::URL::new("dubbo", "/com.example.Greeter");
-        server_url.ip = "127.0.0.1".into();
-        server_url.port = port.to_string();
-
-        let invoker = std::sync::Arc::new(MockInvoker::new(server_url.clone()));
-        let server = dubbo_rs_protocol_dubbo::transport::DubboServer::new(
+        let (server, port) = bind_rs_server_with_retry(
             dubbo_rs_protocol_dubbo::codec::SerializationId::Hessian2,
         )
-        .with_invoker(invoker);
-        drop(held_port);
-        server.bind(&server_url).await.expect("server bind");
-        tokio::time::sleep(Duration::from_millis(50)).await;
+        .await;
 
         // Connect client
         let mut client_url = dubbo_rs_common::url::URL::new("dubbo", "/com.example.Greeter");

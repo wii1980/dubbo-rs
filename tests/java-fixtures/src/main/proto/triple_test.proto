@@ -1,0 +1,22 @@
+syntax = "proto3";
+package triple.test;
+
+message TripleRequestWrapper {
+  string serialize_type = 1;
+  repeated bytes args = 2;
+  repeated string arg_types = 3;
+}
+
+message TripleResponseWrapper {
+  string serialize_type = 1;
+  bytes data = 2;
+  string type = 3;
+}
+
+service TripleService {
+  rpc Echo(TripleRequestWrapper) returns (TripleResponseWrapper);
+  rpc SayHello(TripleRequestWrapper) returns (TripleResponseWrapper);
+  rpc ServerStreamEcho(TripleRequestWrapper) returns (stream TripleResponseWrapper);
+  rpc ClientStreamEcho(stream TripleRequestWrapper) returns (TripleResponseWrapper);
+  rpc BidiStreamEcho(stream TripleRequestWrapper) returns (stream TripleResponseWrapper);
+}
