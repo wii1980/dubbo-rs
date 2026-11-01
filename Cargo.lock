@@ -1154,6 +1154,7 @@ dependencies = [
  "dubbo-rs-protocol-triple",
  "dubbo-rs-proxy",
  "dubbo-rs-registry",
+ "futures-core",
  "tokio",
  "tonic 0.14.5",
  "tracing",

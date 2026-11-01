@@ -44,6 +44,10 @@ pub use dubbo_rs_common;
 pub use dubbo_rs_proxy;
 
 use anyhow::Result;
+
+mod conn_hook;
+
+pub use conn_hook::{tracked_incoming, ConnectionEvent, ConnectionHook, HookedIncoming, HookedStream};
 use dubbo_rs_common::url::URL;
 use dubbo_rs_config::ProtocolConfig;
 use dubbo_rs_filter::Filter;
@@ -91,6 +95,7 @@ pub struct Server {
     shutdown_rx: Option<watch::Receiver<bool>>,
     registry: Option<Box<dyn Registry>>,
     service_url: Option<URL>,
+    connection_hook: Option<ConnectionHook>,
 }
 
 impl Server {
@@ -112,6 +117,7 @@ impl Server {
             shutdown_rx: Some(rx),
             registry: None,
             service_url: None,
+            connection_hook: None,
         }
     }
 
@@ -171,6 +177,18 @@ impl Server {
     #[must_use]
     pub fn with_service_url(mut self, url: URL) -> Self {
         self.service_url = Some(url);
+        self
+    }
+
+    /// Install a hook that is invoked when an accepted TCP connection opens
+    /// and when its IO is dropped. Supervisors use this to report busy/idle
+    /// without changing the transport.
+    #[must_use]
+    pub fn with_connection_hook<F>(mut self, hook: F) -> Self
+    where
+        F: Fn(ConnectionEvent) + Send + Sync + 'static,
+    {
+        self.connection_hook = Some(std::sync::Arc::new(hook));
         self
     }
 
@@ -326,11 +344,14 @@ impl Server {
     ///
     /// Returns an error if no services have been registered.
     pub async fn serve_with_listener(self, listener: tokio::net::TcpListener) -> Result<()> {
-        let router = self
-            .router
-            .ok_or_else(|| anyhow::anyhow!("No services registered"))?;
+        let Self {
+            router,
+            connection_hook,
+            ..
+        } = self;
+        let router = router.ok_or_else(|| anyhow::anyhow!("No services registered"))?;
 
-        let incoming = TcpIncoming::from(listener);
+        let incoming = conn_hook::HookedIncoming::new(TcpIncoming::from(listener), connection_hook);
         router.serve_with_incoming(incoming).await?;
         Ok(())
     }
@@ -352,11 +373,14 @@ impl Server {
     where
         Fut: Future<Output = ()>,
     {
-        let router = self
-            .router
-            .ok_or_else(|| anyhow::anyhow!("No services registered"))?;
+        let Self {
+            router,
+            connection_hook,
+            ..
+        } = self;
+        let router = router.ok_or_else(|| anyhow::anyhow!("No services registered"))?;
 
-        let incoming = TcpIncoming::from(listener);
+        let incoming = conn_hook::HookedIncoming::new(TcpIncoming::from(listener), connection_hook);
         router.serve_with_incoming_shutdown(incoming, signal).await?;
         Ok(())
     }
