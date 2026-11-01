@@ -16,6 +16,9 @@
 .DS_Store
 Thumbs.db
 
+# AI agent workspace
+.omo/
+
 # Reference projects (not part of this repo)
 /dubbo-java
 /dubbo-go
